@@ -1,0 +1,54 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-input/paper-input.html">  
+  <dom-module id="polymer-test">
+      <template>
+        <style>
+          :host{
+            display: block;/*por default esta en inline y no puede mostrar los css*/
+          }
+        </style>
+        <!--Al usar la misma variable la llave y las cadenAS hacen 2 vias-->
+        <paper-input label="Nombre" value="{{name}}"></paper-input>
+        <h1 id="titulo">Hola [[name]] , tu tienes [[edad]] años </h1>
+        <!--las llaves son considerados como one way data binding -->
+      </template>
+      <script>
+        Polymer({
+          is:"polymer-test",
+          properties:{
+            name:{
+              type:String,
+              value:'Mundo'
+            },
+            edad:{
+              type:Number,
+              value: 22
+            }
+           },
+           created: function (){
+            // console.log("El elemento se creo");
+            // console.log(this);
+             //console.log(this.$); // undefined
+           },
+           ready:function(){ //DOM
+            // console.log("El elemento esta listo");
+            // console.log(this.$);
+            /*VOy a ejeutar esta funcion despues de un cierto tiempo*/
+            setTimeout(()=>{
+              this.name='Algo nuevo';
+              },3000)
+           },
+           attached:function(){ //DOC
+            //  console.log("El elemento ya esta en el documento");
+           },
+           
+           detached:function(){
+              /*No necesitamos escuchar eventos de algunso componentes*/
+           },
+           attributeChanged:function(){
+            /*Cuando alguna propiedad definida h sido cambiado*/
+           }
+        })
+
+      </script>
+  </dom-module>
